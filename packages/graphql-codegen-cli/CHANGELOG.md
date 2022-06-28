@@ -1,5 +1,11 @@
 # @graphql-codegen/cli
 
+## 2.6.3
+
+### Patch Changes
+
+- c1fe7758a: Remove unused deps
+
 ## 2.6.2
 
 ### Patch Changes

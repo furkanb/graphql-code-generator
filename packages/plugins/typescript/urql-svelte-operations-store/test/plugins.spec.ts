@@ -22,10 +22,10 @@ describe('svelte urql operations store types', () => {
       ],
       {}
     )) as Types.ComplexPluginOutput;
-    expect(result.content).toContain('export type MeQueryStore = OperationStore<MeQuery, MeQueryVariables>;');
+    expect(result.content).toContain('export type MeQueryStore = OperationResultStore<MeQuery>;');
     expect(result.content).toContain(
-      'export type DoSomethingMutationStore = OperationStore<DoSomethingMutation, DoSomethingMutationVariables>;'
+      'export type DoSomethingMutationStore = OperationResultStore<DoSomethingMutation>;'
     );
-    expect(result.prepend).toContain(`import type { OperationStore } from '@urql/svelte';`);
+    expect(result.prepend).toContain(`import type { OperationResultStore } from '@urql/svelte/dist/types/common';`);
   });
 });

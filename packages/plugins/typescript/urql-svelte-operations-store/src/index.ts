@@ -27,17 +27,13 @@ export const plugin: PluginFunction<Record<string, any>, Types.ComplexPluginOutp
       if (node.kind === 'OperationDefinition' && node.name?.value) {
         const operationType: string = pascalCase(node.operation);
         const operationTypeSuffix: string = getOperationSuffix(config, node, operationType);
-        const operationVariablesTypes: string = convertName(node, {
-          suffix: operationTypeSuffix + 'Variables',
-        });
         const storeTypeName: string = convertName(node, {
           suffix: operationTypeSuffix + 'Store',
         });
         const operationResultType: string = convertName(node, {
           suffix: operationTypeSuffix + operationResultSuffix,
         });
-
-        return `export type ${storeTypeName} = OperationStore<${operationResultType}, ${operationVariablesTypes}>;`;
+        return `export type ${storeTypeName} = OperationResultStore<${operationResultType}>;`;
       }
 
       return null;
@@ -45,7 +41,7 @@ export const plugin: PluginFunction<Record<string, any>, Types.ComplexPluginOutp
     .filter(Boolean);
 
   return {
-    prepend: [`import type { OperationStore } from '@urql/svelte';`],
+    prepend: [`import type { OperationResultStore } from '@urql/svelte/dist/types/common';`],
     content: out.filter(Boolean).join('\n'),
   };
 };
